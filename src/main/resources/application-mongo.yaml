@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    show-sql: true
+  data:
+    mongo-db:
+      uri: mongodb://localhost:27017/test
+
+csv-path: csv/testOrders.csv

@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+
+csv-path: csv/testOrders.csv

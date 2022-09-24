@@ -1,0 +1,53 @@
+#image: maven:3.8.6-openjdk-18-slim
+#
+#variables:
+#  MAVEN_SETTINGS: ".mvn/settings.xml"
+#  MAVEN_OPTS: "-Dmaven.repo.local=./.m2/repository"
+#
+#cache:
+#  paths:
+#    - .m2
+#  policy: pull-push
+#  key: "$CI_BUILD_REF_NAME"
+#
+#stages:
+#  - build
+#  - test
+#  - package
+#
+#build:
+#  stage: build
+#  only:
+#    - master
+#    - merge_requests
+#  script:
+#    - "mvn --settings $MAVEN_SETTINGS $MAVEN_OPTS clean compile -P checkstyle"
+#  allow_failure: false
+#
+#test:
+#  stage: test
+#  services:
+#    - name: postgres:14.4-alpine
+#      alias: postgres
+#  variables:
+#    POSTGRES_USER: postgres
+#    POSTGRES_PASSWORD: postgres
+#  only:
+#    - master
+#    - merge_requests
+#  script:
+#    - "mvn -Dspring.profiles.active=ci --settings $MAVEN_SETTINGS $MAVEN_OPTS clean test -Dcheckstyle.skip"
+#  allow_failure: false
+#
+#package:
+#  stage: package
+#  only:
+#    - master
+#    - merge_requests
+#  script:
+#    - "mvn package --settings $MAVEN_SETTINGS $MAVEN_OPTS -DskipTests -Dcheckstyle.skip"
+#  artifacts:
+#    paths:
+#      - "target/*.jar"
+#    expire_in: 2 week
+#  allow_failure: false
